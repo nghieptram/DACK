@@ -1,67 +1,66 @@
 <?php
-
 require_once 'init.php';
-if(!$currentUser)
-{
-    header('Location:index.php');
-    exit();
+
+if (!$currentUser) {
+  header('Location: FormLogin.php');
+  exit();
 }
 
-?>
-
-<?php include 'header.php'; ?>
-<div style="text-align: center">
-<p><h1 href="#" class="text-light bg-dark">Đổi Mật Khẩu</h1></p>
-</div>
-<?php if(isset($_POST['currentpassword']) && isset($_POST['password'])): ?>
-<?php 
-$currentpassword = $_POST['currentpassword'];
-$password = $_POST['password'];
-$hashpassword = password_hash($password,PASSWORD_DEFAULT);
-$success = false;
-
-if(password_verify($currentpassword,$currentUser['password']) && ($password != $currentpassword))
-{
-    updateUserPassword($currentpassword['user-id'],$password);
- $stmt = $db->prepare("UPDATE users SET password = ? where id = ?");
- var_dump($stmt->execute(array($hashpassword, $currentUser['id'])));
 $success = true;
 
+if (isset($_POST['oldPassword'])) {
+  $oldPassword = $_POST['oldPassword'];
+  $newPassword = $_POST['newPassword'];
+  $newPassword2 = $_POST['newPassword2'];
+
+  $oldPasswordOk = password_verify($oldPassword, $currentUser['password']);
+  $newPasswordOk = $newPassword == $newPassword2 && strlen($newPassword) >= 6;
+
+  $success = $oldPasswordOk && $newPasswordOk;
+
+  $success = true;
+  if ($success) {
+    updateUserPassword($currentUser['id'], password_hash($newPassword, PASSWORD_DEFAULT));
+     header('Location: FormLogin.php');
+  }
 }
 
-
 ?>
-<?php if ($success): ?>
-<?php header('Location: FormLogin.php'); ?>
-<?php else : ?>
-<div class ="alert alert-danger" role="alert">
- Thất Bại
+<?php include 'Inheader.php' ?>
+<?php include 'filehide.php' ?>
+
+<div style="z-index: 9999999; position: relative; background-color: rgba(192,192,192,0.4); margin: 3vw 25vw 0 25vw; padding: 2vw 2vw 0 2vw">
+<a href="index.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
+<h1>Đổi mật khẩu</h1>
+<?php if (!$success) : ?>
+ <?   header('Location: change-password.php');?>
+<div class="alert alert-danger" role="alert">
+  <ul>
+    <?php if (!$oldPasswordOk) : ?>
+    <li>Mật khẩu cũ không chính xác!</li>
+    <?php endif; ?>
+    <?php if (!$newPasswordOk) : ?>
+    <li>Mật khẩu mới cần giống nhau và ít nhất 6 ký tự!</li>
+    <?php endif; ?>
+  </ul>
 </div>
 <?php endif; ?>
-<?php else : ?>
-    
-    <form action="change-password.php" method = "POST">
-    <div style="z-index: 9999999; position: relative; background-color: rgba(192,192,192,0.4); margin: 3vw 25vw 0 25vw; padding: 2vw 2vw 0 2vw">
-    <div class = "form-group">
-    <div style="font-center: 0.8cm;text-align: center;">
-   <h2> <label for="currentpassword"> Mật Khẩu Hiện Tại</label> </h2>
-   </div>
-    <input type="currentpassword" class = "form-control" id = "currentpassword" name = "currentpassword" placeholder = "Mật Khẩu Hiện Tại">
-    </div>
-
-    <div class = "form-group">
-    <div style="font-center: 0.8cm;text-align: center;">
-   <h2> <label for="password">Mật Khẩu Mới</label> </h2>
-   </div>
-    <input type="password" class = "form-control" id = "password" name = "password" placeholder = "Mật Khẩu Mới">
-    </div>
-
-    <div style="text-align: center">
-    <p><button type = "submit" class = "btn btn-primary">Đổi Mật Khẩu</button> </p>
-    </div>
-    <HR align="center" WIDTH="50%"/> 
-    </div>
-    </form>
-   
-<?php endif; ?>
-<?php include 'footer.php'; ?>
+<form method="POST">
+  <div class="form-group">
+    <label for="oldPassword">Mật khẩu cũ</label>
+    <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Điền mật khẩu cũ vào đây">
+  </div>
+  <div class="form-group">
+    <label for="newPassword">Mật khẩu mới</label>
+    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Điền mật khẩu mới vào đây">
+  </div>
+  <div class="form-group">
+    <label for="newPassword2">Mật khẩu mới (nhập lại)</label>
+    <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Điền mật khẩu mới vào đây lần nữa">
+  </div>
+  <div style="text-align: center">
+  <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+  </div>
+</form>
+</div>
+<?php include 'footer.php' ?>

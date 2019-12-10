@@ -22,7 +22,7 @@ if (isset($_POST['content'])) {
   }
 }
 ?>
-<?php include 'header.php' ?>
+<?php include 'Inheader.php' ?>
 
 <?php if (!$success) : ?>
 <div class="alert alert-danger" role="alert">

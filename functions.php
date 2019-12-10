@@ -20,6 +20,14 @@ function findUserById($id) {
   return $user;
 }
 
+function findFullname($search) {
+  global $db;
+  $stmt = $db->prepare("SELECT * FROM users WHERE fullname like '%$search%'");
+  $stmt->execute(array(strtolower($search)));
+  $user = $stmt->fetch(PDO::FETCH_ASSOC);
+  return $user;
+}
+
 function updateUser($user) {
     global $db;
     $stmt = $db->prepare("UPDATE users SET fullname = ?, phone = ?, hasAvatar = ? WHERE id = ?");
@@ -31,7 +39,6 @@ function updateUser($user) {
   
   function updateUserPassword($userId, $hashPassword) {
     global $db;
-     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
     $stmt = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
     $stmt->execute(array($hashPassword, $userId));
   }
@@ -85,8 +92,8 @@ function generateRandomString($length = 10) {
         $email->CharSet   = 'UTF-8';                                         // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'ltweb1.2019@gmail.com';                     // SMTP username
-        $mail->Password   = 'ABCxyz123@';                               // SMTP password
+        $mail->Username   = 'ndviet7h@gmail.com';                     // SMTP username
+        $mail->Password   = '01667481692';                               // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 587;                                    // TCP port to connect to
   
@@ -177,5 +184,29 @@ function generateRandomString($length = 10) {
       return true;
     }
     return false;
+  }
+
+  function sendfriendRequest($userId1, $userId2)
+  {
+    global $db;
+    $stmt = $db->prepare("INSERT INTO friendship(userId1,userId2) VALUE (?,?)");
+    $stmt->execute(array ($userId1, $userId2));
+
+  }
+
+  function getfriendship($userId1, $userId2)
+  {
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM friendship WHERE userId1 = ? AND userId2 = ?");
+    $stmt->execute(array ($userId1, $userId2));
+    return  $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  function removefriendRequest($userId1, $userId2)
+  {
+    global $db;
+    $stmt = $db->prepare("DELETE FROM friendship  WHERE (userId1 = ? AND userId2 = ?) OR (userId2 = ? AND userId1 = ?)");
+    $stmt->execute(array ($userId1, $userId2,$userId1, $userId2));
+
   }
 ?>
