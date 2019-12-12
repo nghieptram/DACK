@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
 function findUserByEmail($email) {
   global $db;
   $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");

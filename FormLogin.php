@@ -1,8 +1,6 @@
 <?php 
 require_once 'init.php';
-
 require_once 'Header.php';
-
 $success = true;
 
 if (!empty($_POST['email']) && !empty($_POST['password'])) {  
@@ -42,11 +40,11 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 <form method="POST">
   <div class="form-group">
   <label for="email"> <strong> Tên Đăng Nhập </strong></label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Điền email vào đây" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
+    <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
   </div>
   <div class="form-group">
   <label for="password"><strong>Mật Khẩu</strong></label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Điền mật khẩu vào đây">
+    <input type="password" class="form-control" id="password" name="password" placeholder="Mật Khẩu">
   </div>
   <div style="text-align: center">
   <button type="submit" class="btn btn-primary">Đăng nhập</button>
@@ -55,21 +53,17 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
   </form>
   
   <div style="font-center: 0.8cm;text-align: center;">
-  <a href="forgot-password.php">Forgot PassWord?</a> 
+  <a href="forgot-password.php">Quên Mật Khẩu?</a> 
   <HR align="center" WIDTH="50%"/>   
 </div>
   
-  
-  
-         
-           
-       <!--Chuyển trang--->
-             <form action="FormRegister.php" method="POST">
-            <div style="text-align: center">
-            <button type="submit" class="btn btn-primary">Tạo Tài Khoản Mới</button>
-            </div>
-            <HR align="center" WIDTH="50%"/> 
-            </form>
+  <!--Chuyển trang--->
+        <form action="FormRegister.php" method="POST">
+      <div style="text-align: center">
+      <button type="submit" class="btn btn-primary">Tạo Tài Khoản Mới</button>
+      </div>
+      <HR align="center" WIDTH="50%"/> 
+      </form>
   
 
 <?php include 'footer.php' ?>

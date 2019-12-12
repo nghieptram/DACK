@@ -2,29 +2,41 @@
   require_once 'Init.php';
 
   $success = true;
-  if(isset($_POST['submit'])){
-  if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword'])) {
+  if(isset($_POST['submit']))
+  {
+  if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword'])) 
+  {
     $email = strtolower($_POST['email']);
+    $pass1= strtolower($_POST['password']);
+    $pass2= strtolower($_POST['repassword']);
+    $passOK= $pass1 == $pass2;
     $password = password_hash($_POST['repassword'], PASSWORD_DEFAULT);
     
     //$stmt = $db->prepare("UPDATE users SET password = ?  WHERE id = ?");
     //$stmt->execute(array ($password, $user['id']));
     // Kiểm tra xem email có trùng không
     $user = findUserByEmail($email);
-
-    if ($user) {
-      $success = true;
-      $insertId = createForgotPass($email, $password);
-      $_SESSION['userId'] = $insertId;
-      header('Location: ActiveForgotPass.php');
-      exit();
-    } else {
-        $success = false;
-      
+    if($passOK)
+    {
+        $passOK = true;
+        if ($user) {
+            $success = true;
+            $insertId = createForgotPass($email, $password);
+            $_SESSION['userId'] = $insertId;
+            header('Location: ActiveForgotPass.php');
+            exit();
+        } else {
+            $success = false;
+            
+        }
     }
-  }
+    else{
+        $passOK =false;
+    }
+ }
 }
 ?>
+
 <?php if (!$success) : ?>
       <div class="alert alert-danger" role="alert">
         Email chưa được đăng ký
