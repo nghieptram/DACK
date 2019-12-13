@@ -1,9 +1,6 @@
 
 <?php 
 require_once 'init.php';
-if (!isset($_SESSION['userId'])) {
-    header('Location: FormLogin.php');
-  }
 
 if ($currentUser) {
    $newFeeds = getNewFeeds();
@@ -29,11 +26,11 @@ if ($currentUser) {
 <?php foreach ($newFeeds as $post) :  ?>
     <div class="card" style="margin: 2vw;">
     <div class="card-body">
-        <h5 class="card-title">x
+        <h5 class="card-title">
         <div class="row">
             <div class="col">
             <?php if ($post['userHasAvatar']) : ?>
-            <img class="avatar" src="uploads/avatars/<?php echo $post['userId'] ?>.jpg">
+            <img class="avatar" src="./IMG/<?php echo $post['userId'] ?>.jpg">
             <?php else : ?>
             <img class="avatar" src="no-avatar.jpg">
             
@@ -45,8 +42,9 @@ if ($currentUser) {
         </div>
         </h5>
         <p class="card-text">
-        <small>Đăng lúc: <?php echo $post['createdAt'] ?></small>
         <p><?php echo $post['content'] ?></p>
+        <small>Đăng lúc: <?php echo $post['createdAt'] ?></small>
+       
         </p>
     </div>
     </div>
