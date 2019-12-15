@@ -148,11 +148,17 @@
                             <button class="iconTop"><i class="far fa-heart"></i></button>
                         </a>
                     </li>
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item">
+                        <a class="nav-link" href="userprofile.php">
+                            <button class="iconTop"><i class="far fa-user"></i></button>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <button class="iconTop"><i class="far fa-user"></i></button>
                         </a>
+                        
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Cài đặt</a>
 
@@ -165,7 +171,7 @@
                             <a class="dropdown-item" href="logout.php">Đăng Xuất</a>
                         </div>
 
-                    </li>
+                    </li> --> 
                 </ul>
                 <!-- <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

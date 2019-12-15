@@ -45,7 +45,7 @@ if (isset($_POST['fullname'])) {
 <?php include 'InHeader.php' ?>
 <?php include 'filehide.php' ?>
 <div style="z-index: 9999999; position: relative; background-color: rgba(192,192,192,0.4); margin: 3vw 25vw 0 25vw; padding: 2vw 2vw 0 2vw">
-<a href="index.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
+<a href="userprofile.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
 <h1>Cập Nhật Cá Nhân</h1>
 <?php if (!$success) : ?>
 

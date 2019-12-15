@@ -7,6 +7,7 @@ if ($currentUser) {
 }
 ?>
 <?php include 'InHeader.php' ?> 
+
 <?php if ($currentUser) : ?>
 <!-- <p>Chào mừng <?php echo $currentUser['fullname'] ?> đã trở lại.</p> -->
 
@@ -15,10 +16,14 @@ if ($currentUser) {
 <div class="col-6">
 <form action="post.php" method = "POST" >
         <div class = "form-group">
+        
     <label for="content"><h1>Tạo Bài Viết</h1></label>
-    <textarea class="form-control" name='content' id="content" rows="3"></textarea>
+   <a href="post.php"> <textarea class="form-control" name='content' id="content" rows="3"></textarea></a>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Đăng Bài</button>
+        <button type="button" class="btn btn-outline-primary">Hình Ảnh</button>
+        <button type="button" class="btn btn-outline-secondary">Cảm Xúc</button>
+        <button type="button" class="btn btn-outline-success">Check In</button>
+        <!-- <button type="submit" class="btn btn-primary btn-lg">Đăng Bài</button> -->
         </form>
 </div>
 <div class="col-3"></div>
