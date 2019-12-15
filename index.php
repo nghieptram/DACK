@@ -1,7 +1,9 @@
 
 <?php 
 require_once 'init.php';
-
+if (!isset($_SESSION['userId'])) {
+    header('Location: FormLogin.php');
+  }
 if ($currentUser) {
    $newFeeds = getNewFeeds();
 }

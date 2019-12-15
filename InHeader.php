@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="./CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/style.css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -132,10 +134,20 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <form class="form-inline my-2 my-lg-0" style="margin: 0 3vw 0 2vw;">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Tìm Kiếm"
-                            style="align-items:center;font-size:12px;height: 30px;width: 200px">
-                    </form>
+                <head>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script> 
+                </head>
+                <div class="container">
+                <input type="text" class="form-control input-lg" data-toggle="modal" data-target="#exampleModal" placeholder="Tìm Kiếm" />
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <input type="text" name="country" id="country" class="form-control input-lg" autocomplete="off" placeholder="Tìm Kiếm" />
+                </div>
+                </div>
+                </div>
+            </div>
                 </ul>
                 <ul class="nav navbar-expand-lg">
                     <li class="nav-item">
@@ -153,10 +165,10 @@
                             <button class="iconTop"><i class="far fa-user"></i></button>
                         </a>
                     </li>
-                    <!-- <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <button class="iconTop"><i class="far fa-user"></i></button>
+                            
                         </a>
                         
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -171,7 +183,7 @@
                             <a class="dropdown-item" href="logout.php">Đăng Xuất</a>
                         </div>
 
-                    </li> --> 
+                    </li> 
                 </ul>
                 <!-- <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -180,4 +192,27 @@
             </div>
     </div>
 </body>
-<?php endif; ?>
+<script>
+$(document).ready(function(){
+ 
+ $('#country').typeahead({
+  source: function(query, result)
+  {
+   $.ajax({
+    url:"fetch.php",
+    method:"POST",
+    data:{query:query},
+    dataType:"json",
+    success:function(data)
+    {
+     result($.map(data, function(item){
+      return item;
+     }));
+    }
+   })
+  }
+ });
+ 
+});
+</script>
+<?php endif ?>
