@@ -115,7 +115,13 @@
     </style>
 </head>
 <?php if ($currentUser): ?>
-
+<?php 
+ if(isset($_POST['submit']))
+ {
+    if(!empty($_POST['country'])) 
+    header('Location: Search.php');
+ }
+?>
 <body>
     <div>
         <div class="container">
@@ -133,6 +139,7 @@
 
                     </a>
                 </div>
+                <form action="Search.php" method= "POST">
                 <ul class="nav navbar-nav">
                 <head>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -142,13 +149,19 @@
                 <input type="text" class="form-control input-lg" data-toggle="modal" data-target="#exampleModal" placeholder="Tìm Kiếm" />
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <input type="text" name="country" id="country" class="form-control input-lg" autocomplete="off" placeholder="Tìm Kiếm" />
+                <div class="modal-content" style="width: 40vw;">
+                <div class="modal-body">
+                <input style="width: 20vw; float: left; margin-right: 2vw" type="text" name="country" id="country" class="form-control input-lg" autocomplete="off" placeholder="Tìm Kiếm" />
+                
+                </div>
+                <button type="submit" name ="submit" class="btn btn-outline-success " style="float: left;">Tìm Kiếm</button>
                 </div>
                 </div>
                 </div>
+                
             </div>
                 </ul>
+                </form>
                 <ul class="nav navbar-expand-lg">
                     <li class="nav-item">
                         <a class="nav-link" href="index.php">
@@ -194,7 +207,7 @@
 </body>
 <script>
 $(document).ready(function(){
- 
+    
  $('#country').typeahead({
   source: function(query, result)
   {
