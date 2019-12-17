@@ -153,7 +153,12 @@
                 </form>
                 <ul class="nav navbar-expand-lg">
                     <li class="nav-item">
+<<<<<<< HEAD
                     <div class="nav-link">
+=======
+                   
+                        <div class="nav-link">
+>>>>>>> 8b6a9cbe259a7eba83eed31a511737a15755ca49
                             <button data-toggle="modal" data-target="#message" class="iconTop"><i class="far fa-compass"></i></button>
                             <?php include "message.php"?>
                         </div>

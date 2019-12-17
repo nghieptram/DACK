@@ -16,3 +16,4 @@ $currentUser = null;
 if (isset($_SESSION['userId'])) {
     $currentUser = findUserById($_SESSION['userId']);
   }
+
