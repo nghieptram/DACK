@@ -41,15 +41,18 @@ $success = true;
                             <a class="dropdown-item" href="#">Cài đặt</a>
 
                             <a class="dropdown-item" href="change-password.php">Đổi Mật Khẩu</a>
-                        
+                            <a class="dropdown-item" href="friend.php">Danh Sách Bạn Bè</a>
                             <a class="dropdown-item" href="update-profile.php">Cập Nhập Thông Tin</a>
-
-
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="logout.php">Đăng Xuất</a>
                         </div>
 
                     </li> 
+                    <form action="">
+                    <label style = "margin-left: 3vw" for="baiviet"> Bài Viết</label>
+                   <a href="friend.php"> <label style = "margin-left: 3vw" for="nguoitheodoi"> Người Theo Dõi</label></a>
+                    <label style = "margin-left: 3vw" for="dangtheodoi"> Đang Theo Dõi</label>
+                    </form>
         <br>
     </div>
     <br>

@@ -210,4 +210,54 @@ function generateRandomString($length = 10) {
     $stmt->execute(array ($userId1, $userId2,$userId1, $userId2));
 
   }
+  function getFriends($userId) {
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM friendship WHERE userId1 = ? OR userId2 = ?");
+    $stmt->execute(array($userId, $userId));
+    $following = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $friendship = array();
+    for ($i = 0; $i < count($following); $i++) {
+      $row1 = $following[$i];
+      if ($userId == $row1['userId1']) {
+        $userId2 = $row1['userId2'];
+        for ($j = 0; $j < count($following); $j++) {
+          $row2 = $following[$j];
+          if ($userId == $row2['userId2'] && $userId2 == $row2['userId1']) {
+            $friendship[] = findUserById($userId2);
+          }
+        }
+      }
+    }
+    return $friendship;
+  }
+  function getLatestConversations($userId) {
+    global $db;
+    $stmt = $db->prepare("SELECT userId2 AS id, u.fullname, u.hasAvatar FROM messages AS m LEFT JOIN users AS u ON u.id = m.userId2 WHERE userId1 = ? GROUP BY userId2 ORDER BY createdAt DESC");
+    $stmt->execute(array($userId));
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    for ($i = 0; $i < count($result); $i++) {
+      $stmt = $db->prepare("SELECT * FROM messages WHERE userId1 = ? AND userId2 = ? ORDER BY createdAt DESC LIMIT 1");
+      $stmt->execute(array($userId, $result[$i]['id']));
+      $lastMessage = $stmt->fetch(PDO::FETCH_ASSOC);
+      $result[$i]['lastMessage'] = $lastMessage;
+    }
+    return $result;
+  }
+  function getMessagesWithUserId($userId1, $userId2) {
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM messages WHERE userId1 = ? AND userId2 = ? ORDER BY createdAt");
+    $stmt->execute(array($userId1, $userId2));
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+  function sendMessage($userId1, $userId2, $content) {
+    global $db;
+    $stmt = $db->prepare("INSERT INTO messages (userId1, userId2, content, type, createdAt) VALUE (?, ?, ?, ?, CURRENT_TIMESTAMP())");
+    $stmt->execute(array($userId1, $userId2, $content, 0));
+    $id = $db->lastInsertId();
+    $stmt = $db->prepare("SELECT * FROM messages WHERE id = ?");
+    $stmt->execute(array($id));
+    $newMessage = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $db->prepare("INSERT INTO messages (userId2, userId1, content, type, createdAt) VALUE (?, ?, ?, ?, ?)");
+    $stmt->execute(array($userId1, $userId2, $content, 1, $newMessage['createdAt']));
+  }
 ?>

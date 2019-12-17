@@ -1,18 +1,25 @@
 <?php
 require_once 'init.php';
-
+$updateprofile = findUserById($_GET['id']);
+$friendship = getFriends($currentUser['id']);
+foreach ($friendship as $friend) {
+  if ($friend['id'] == $updateprofile['id']) {
+    $isFriend = true;
+  }
+}
 if (!$currentUser) {
   header('Location: index.php');
   exit();
 }
  $userId = $_GET['id'];
- $profile = findUserById($userId);
+ $updateprofile = findUserById($userId);
 
 $isfollowing = getfriendship($currentUser['id'],$userId);
 $isfollower  =  getfriendship($userId,$currentUser['id']);
 ?>
 <?php include 'InHeader.php' ?>
-<h1><?php echo $profile['fullname'] ?></h1>
+ <h1><?php echo $updateprofile['fullname'] ?></h1>
+<img src="./IMG/<?php echo $updateprofile['id'] ?>.jpg">
 <?php  if($isfollowing & $isfollower) : ?>
 Ban Be
 <form method = "POST" action="remove-friend.php">
