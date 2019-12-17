@@ -1,6 +1,6 @@
 <?php
 //fetch.php
-$connect = mysqli_connect("localhost", "root", "", "demo1");
+$connect = mysqli_connect("localhost", "root", "", "doan1");
 $request = mysqli_real_escape_string($connect, $_POST["query"]);
 $query = "
  SELECT * FROM users WHERE fullname LIKE N'%".$request."%'

@@ -10,9 +10,10 @@ session_start();
 $page = basename($_SERVER['SCRIPT_NAME'], '.php');
 
 
-$db = new PDO("mysql:host=localhost;dbname=demo1;charset=utf8", 'root', '');
+$db = new PDO("mysql:host=localhost;dbname=doan1;charset=utf8", 'root', '');
 $currentUser = null;
 
 if (isset($_SESSION['userId'])) {
     $currentUser = findUserById($_SESSION['userId']);
   }
+

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 10, 2019 lúc 07:43 AM
+-- Thời gian đã tạo: Th12 17, 2019 lúc 08:26 AM
 -- Phiên bản máy phục vụ: 10.4.6-MariaDB
 -- Phiên bản PHP: 7.1.32
 
@@ -33,6 +33,49 @@ CREATE TABLE `friendship` (
   `userId2` int(11) NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `friendship`
+--
+
+INSERT INTO `friendship` (`userId1`, `userId2`, `createdAt`) VALUES
+(49, 51, '2019-12-17 13:25:11'),
+(49, 52, '2019-12-17 13:40:01'),
+(51, 49, '2019-12-17 13:25:30'),
+(51, 52, '2019-12-17 13:39:42'),
+(52, 49, '2019-12-17 13:39:26'),
+(52, 51, '2019-12-17 13:39:31');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `content` text CHARACTER SET utf8 NOT NULL,
+  `userId1` int(11) NOT NULL,
+  `userId2` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `messages`
+--
+
+INSERT INTO `messages` (`id`, `content`, `userId1`, `userId2`, `type`, `createdAt`) VALUES
+(1, 'ă', 51, 49, 0, '2019-12-17 06:35:18'),
+(2, 'ă', 49, 51, 1, '2019-12-17 06:35:18'),
+(3, 'ă', 51, 49, 0, '2019-12-17 06:35:25'),
+(4, 'ă', 49, 51, 1, '2019-12-17 06:35:25'),
+(5, 'ă', 51, 49, 0, '2019-12-17 06:36:29'),
+(6, 'ă', 49, 51, 1, '2019-12-17 06:36:29'),
+(7, 'alo', 49, 51, 0, '2019-12-17 06:37:04'),
+(8, 'alo', 51, 49, 1, '2019-12-17 06:37:04'),
+(9, 'lo', 52, 49, 0, '2019-12-17 06:40:18'),
+(10, 'lo', 49, 52, 1, '2019-12-17 06:40:18');
 
 -- --------------------------------------------------------
 
@@ -75,7 +118,27 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`id`, `userId`, `content`, `createdAt`) VALUES
 (11, 50, 'NGHIỆP TRẦM', '2019-12-06 05:22:03'),
 (12, 51, 'nghiep\r\n', '2019-12-10 05:59:46'),
-(13, 51, 'nghiep tram\r\n', '2019-12-10 06:29:22');
+(13, 51, 'nghiep tram\r\n', '2019-12-10 06:29:22'),
+(14, 51, 'ưqe', '2019-12-13 05:23:29'),
+(15, 51, 'nghiệp trầm', '2019-12-13 05:25:13'),
+(16, 51, 'nghiệp nè hihihi\r\n', '2019-12-13 05:39:17'),
+(17, 51, 'nghiêp', '2019-12-13 05:42:09'),
+(18, 51, 'QƯE', '2019-12-13 05:48:36'),
+(19, 51, 'qew', '2019-12-13 06:06:48'),
+(20, 51, 'w', '2019-12-13 06:07:16'),
+(21, 51, 'nghiệp trầm', '2019-12-14 05:33:16'),
+(22, 51, 'nghiep', '2019-12-14 05:38:05'),
+(23, 51, '12345', '2019-12-14 05:39:18'),
+(24, 51, 'nghiệ tràm', '2019-12-14 05:40:02'),
+(25, 51, 'nghiệp', '2019-12-14 05:55:06'),
+(26, 51, 'nghiệp hữu', '2019-12-14 05:55:41'),
+(27, 51, '123', '2019-12-15 12:46:14'),
+(28, 51, 'NGHIỆP TRẦM', '2019-12-15 12:50:28'),
+(29, 51, '123qeqw', '2019-12-15 12:58:18'),
+(30, 51, 'nghiệp trầm', '2019-12-15 13:15:09'),
+(31, 51, 'NGHIỆP', '2019-12-15 13:21:30'),
+(32, 51, '123', '2019-12-15 13:22:36'),
+(33, 49, 'nghiệp', '2019-12-17 06:13:41');
 
 -- --------------------------------------------------------
 
@@ -100,8 +163,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `phone`, `email`, `password`, `hasAvatar`, `status`, `code`, `code2`) VALUES
-(49, 'HUY', '12345678991', 'ndhuy2711@gmail.com', '$2y$10$ZNKylS793H6k0fMnGWe6DulCxjM/NpdDvmWHIW6HuZErc/nVymLZC', 1, 1, '', '585522'),
-(51, 'nghiep tram1111', '0969323317', 'thnghiep.17ck1@gmail.com', '$2y$10$3/3Kkmio6kzZHcTyClmRquNfKvOkTci/8aKNvSe2Lvu6xjpjj.KRm', 1, 0, '268266', '585522');
+(49, 'nghiep', '0969323317', 'ndhuy2711@gmail.com', '$2y$10$ZNKylS793H6k0fMnGWe6DulCxjM/NpdDvmWHIW6HuZErc/nVymLZC', 1, 1, '', '585522'),
+(51, 'ipx', '0969323317', 'thnghiep.17ck1@gmail.com', '$2y$10$3/3Kkmio6kzZHcTyClmRquNfKvOkTci/8aKNvSe2Lvu6xjpjj.KRm', 1, 0, '268266', '585522'),
+(52, 'nghiep tram111111', '', 'abc@gmail.com', '$2y$10$iwB9IKG5D93Xr7WRVSC/TufwPqbMmV.4i8bIzlpJKcpO/KN26vopO', 0, 1, '', '');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -112,6 +176,12 @@ INSERT INTO `users` (`id`, `fullname`, `phone`, `email`, `password`, `hasAvatar`
 --
 ALTER TABLE `friendship`
   ADD PRIMARY KEY (`userId1`,`userId2`);
+
+--
+-- Chỉ mục cho bảng `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `name`
@@ -137,6 +207,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT cho bảng `name`
 --
 ALTER TABLE `name`
@@ -146,13 +222,13 @@ ALTER TABLE `name`
 -- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
