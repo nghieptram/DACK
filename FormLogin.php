@@ -2,7 +2,6 @@
 require_once 'init.php';
 require_once 'Header.php';
 $success = true;
-
 if (!empty($_POST['email']) && !empty($_POST['password'])) {  
   $user = findUserByEmail($_POST['email']);
   if ($user) {

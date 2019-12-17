@@ -29,21 +29,18 @@
         height: 50px;
         border-radius: 50%;
     }
-
     .avatar_news {
         vertical-align: middle;
         width: 30px;
         height: 30px;
         border-radius: 50%;
     }
-
     #main {
         width: auto;
         margin-left: 23%;
         margin-top: 40px;
         display: flex;
     }
-
     #avatar {
         width: 150px;
         height: 150px;
@@ -52,13 +49,11 @@
         border: 1px solid #C3C3C3;
         object-fit: cover;
     }
-
     #name {
         margin-left: 30px;
         font-size: 18;
         color: #2F2F2F;
     }
-
     .button {
         background-color: white;
         border-color: #AEAEAE;
@@ -72,18 +67,15 @@
         margin-left: 20px;
         cursor: pointer;
     }
-
     .btnSetting {
         background-color: white;
         color: black;
-
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 20px;
         cursor: pointer;
     }
-
     .iconTop {
         font-size: 28px;
         background-color: none;
@@ -91,7 +83,6 @@
         cursor: pointer;
         color: #212121;
     }
-
     .iconSetting {
         font-size: 22px;
         background-color: none;
@@ -100,11 +91,9 @@
         color: #212121;
         margin-left: 10px;
     }
-
     .textBottom {
         font-size: 18px;
     }
-
     .line {
         margin-left: 15px;
         margin-right: 15px;
@@ -178,10 +167,10 @@
                             <button class="iconTop"><i class="far fa-user"></i></button>
                         </a>
                     </li>
-                    <li class="nav-item dropdown active">
+                    <!-- <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            
+                            <button class="iconTop"><i class="far fa-user"></i></button>
                         </a>
                         
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -196,7 +185,7 @@
                             <a class="dropdown-item" href="logout.php">Đăng Xuất</a>
                         </div>
 
-                    </li> 
+                    </li> --> 
                 </ul>
                 <!-- <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
