@@ -51,8 +51,9 @@ $success = true;
                     <form action="">
                     <label style = "margin-left: 3vw" for="baiviet"> Bài Viết</label>
                    <a href="friend.php"> <label style = "margin-left: 3vw" for="nguoitheodoi"> Người Theo Dõi</label></a>
-                    <label style = "margin-left: 3vw" for="dangtheodoi"> Đang Theo Dõi</label>
+                   <a href="friend.php"> <label style = "margin-left: 3vw" for="dangtheodoi"> Đang Theo Dõi</label></a>
                     </form>
+                   
         <br>
     </div>
     <br>

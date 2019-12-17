@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 17, 2019 lúc 08:26 AM
+-- Thời gian đã tạo: Th12 17, 2019 lúc 04:08 PM
 -- Phiên bản máy phục vụ: 10.4.6-MariaDB
 -- Phiên bản PHP: 7.1.32
 
@@ -75,7 +75,25 @@ INSERT INTO `messages` (`id`, `content`, `userId1`, `userId2`, `type`, `createdA
 (7, 'alo', 49, 51, 0, '2019-12-17 06:37:04'),
 (8, 'alo', 51, 49, 1, '2019-12-17 06:37:04'),
 (9, 'lo', 52, 49, 0, '2019-12-17 06:40:18'),
-(10, 'lo', 49, 52, 1, '2019-12-17 06:40:18');
+(10, 'lo', 49, 52, 1, '2019-12-17 06:40:18'),
+(11, 'hi', 51, 49, 0, '2019-12-17 13:35:28'),
+(12, 'hi', 49, 51, 1, '2019-12-17 13:35:28'),
+(13, 'Euclid thì khác, cũng làm việc với modulo là hợp số thứ hai, thuật toán này ít hiệu quả hơn khi ta nói về thuật toán tính lũy thừa theo modulo ở phần cuối của video bạn sẽ thấy thời gian chạy của nó sẽ là lập phương chiều dài của p hay cách khác là log của P lập phương thuật toán của Euclid thì lại có thể tính nghịch đảo trong thời gian tỉ lệ với bình phương chiều dài của p thế là thuật toán mới này vừa ít tổng quát hơn và cũng kém hiệu quả hơn so với Euclid.\r\n', 51, 49, 0, '2019-12-17 13:35:43'),
+(14, 'Euclid thì khác, cũng làm việc với modulo là hợp số thứ hai, thuật toán này ít hiệu quả hơn khi ta nói về thuật toán tính lũy thừa theo modulo ở phần cuối của video bạn sẽ thấy thời gian chạy của nó sẽ là lập phương chiều dài của p hay cách khác là log của P lập phương thuật toán của Euclid thì lại có thể tính nghịch đảo trong thời gian tỉ lệ với bình phương chiều dài của p thế là thuật toán mới này vừa ít tổng quát hơn và cũng kém hiệu quả hơn so với Euclid.\r\n', 49, 51, 1, '2019-12-17 13:35:43'),
+(15, 'ê mày', 51, 52, 0, '2019-12-17 13:36:59'),
+(16, 'ê mày', 52, 51, 1, '2019-12-17 13:36:59'),
+(17, 'alo \r\n', 51, 52, 0, '2019-12-17 13:37:18'),
+(18, 'alo \r\n', 52, 51, 1, '2019-12-17 13:37:18'),
+(19, 'alo \r\n', 51, 52, 0, '2019-12-17 13:38:05'),
+(20, 'alo \r\n', 52, 51, 1, '2019-12-17 13:38:05'),
+(21, 'alo \r\n', 51, 52, 0, '2019-12-17 13:38:41'),
+(22, 'alo \r\n', 52, 51, 1, '2019-12-17 13:38:41'),
+(23, 'alo \r\n', 51, 52, 0, '2019-12-17 13:38:43'),
+(24, 'alo \r\n', 52, 51, 1, '2019-12-17 13:38:43'),
+(25, 'alo \r\n', 51, 52, 0, '2019-12-17 13:38:47'),
+(26, 'alo \r\n', 52, 51, 1, '2019-12-17 13:38:47'),
+(27, 'And second of all, it turns out this algorithm is actually less efficient. When we talk about how to do modular exponentiations -- we\'re gonna do that in the last segment in this module -- you\'ll see that the running time to compute this exponentiation is actually cubic in the size of P. So this will take roughly log cube of P, whereas if you remember, Euclid\'s algorithm was able to compute the inverse in quadratic time in the representation of P. So not only is this algorithm less general it only works for primes, it\'s also less efficient. So score one for Euclid.', 51, 52, 0, '2019-12-17 13:39:58'),
+(28, 'And second of all, it turns out this algorithm is actually less efficient. When we talk about how to do modular exponentiations -- we\'re gonna do that in the last segment in this module -- you\'ll see that the running time to compute this exponentiation is actually cubic in the size of P. So this will take roughly log cube of P, whereas if you remember, Euclid\'s algorithm was able to compute the inverse in quadratic time in the representation of P. So not only is this algorithm less general it only works for primes, it\'s also less efficient. So score one for Euclid.', 52, 51, 1, '2019-12-17 13:39:58');
 
 -- --------------------------------------------------------
 
@@ -138,7 +156,9 @@ INSERT INTO `posts` (`id`, `userId`, `content`, `createdAt`) VALUES
 (30, 51, 'nghiệp trầm', '2019-12-15 13:15:09'),
 (31, 51, 'NGHIỆP', '2019-12-15 13:21:30'),
 (32, 51, '123', '2019-12-15 13:22:36'),
-(33, 49, 'nghiệp', '2019-12-17 06:13:41');
+(33, 49, 'nghiệp', '2019-12-17 06:13:41'),
+(34, 51, 'HELLO MẤY CƯNG', '2019-12-17 12:51:21'),
+(35, 51, 'hi im go cu', '2019-12-17 13:48:01');
 
 -- --------------------------------------------------------
 
@@ -210,7 +230,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `name`
@@ -222,7 +242,7 @@ ALTER TABLE `name`
 -- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

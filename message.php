@@ -8,9 +8,12 @@ require_once 'init.php';
 $conversations = getLatestConversations($currentUser['id']);
 
 ?>
-     
+  <div style="text-align: center; padding-bottom: 2vw;">    
 <h1>Danh sách tin nhắn</h1>
-<a href="new-message.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Thêm cuộc trò chuyện</a>
+</div>
+<div style="text-align: center;">   
+<a href="new-message.php" class="btn btn-primary btn-lg active" role="button"  aria-pressed="true">Thêm cuộc trò chuyện</a>
+</div>
 <?php foreach ($conversations as $conversation) : ?>
 <div class="card" style="margin-bottom: 10px;">
   <div class="card-body">
