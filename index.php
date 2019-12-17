@@ -1,7 +1,5 @@
-
 <?php 
 require_once 'init.php';
-
 if ($currentUser) {
    $newFeeds = getNewFeeds();
 }
@@ -14,16 +12,11 @@ if ($currentUser) {
 <div class="row" style="margin: 2vw 0 2vw 0">
 <div class="col-3"></div>
 <div class="col-6">
+<label for="content"><h1>Tạo Bài Viết</h1></label>
 <form action="post.php" method = "POST" >
         <div class = "form-group">
-        
-    <label for="content"><h1>Tạo Bài Viết</h1></label>
-   <a href="post.php"> <textarea class="form-control" name='content' id="content" rows="3"></textarea></a>
-        </div>
-        <button type="button" class="btn btn-outline-primary">Hình Ảnh</button>
-        <button type="button" class="btn btn-outline-secondary">Cảm Xúc</button>
-        <button type="button" class="btn btn-outline-success">Check In</button>
-        <!-- <button type="submit" class="btn btn-primary btn-lg">Đăng Bài</button> -->
+        <textarea class="form-control" name='content' id="content" rows="3" data-toggle="modal" data-target="#Modal"></textarea>
+   <?php include "post.php"?> 
         </form>
 </div>
 <div class="col-3"></div>

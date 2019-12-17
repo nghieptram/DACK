@@ -14,12 +14,12 @@ require_once "functions.php";
              }
 ?>
 <?php if($nameOK)
+$sql = true;
 $query = "select * from users where fullname like N'%$search%'";
 $connect = mysqli_connect("localhost", "root", "", "doan1");
 $sql = mysqli_query($connect, $query);
 $num = mysqli_num_rows($sql);
-
-if ($num > 0 && $search) 
+if ($num > 0 && $search != "") 
                 {
                     // Dùng $num để đếm số dòng trả về.
                     echo "$num ket qua tra ve voi tu khoa <b>$search</b>";
@@ -32,10 +32,8 @@ if ($num > 0 && $search)
                         echo '</tr>';
                     }
                     echo '</table>';
-                } 
-                else  if ($num == 0 && !$search) 
-                {
+                }
+                else if($num == 0 || $search == "" ) {
                     echo "Khong tim thay ket qua!";
                 }
 ?>
-
