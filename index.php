@@ -18,11 +18,9 @@ if ($currentUser) {
         <div class = "form-group">
         
     <label for="content"><h1>Tạo Bài Viết</h1></label>
-   <a href="post.php"> <textarea class="form-control" name='content' id="content" rows="3"></textarea></a>
+   <textarea class="form-control" name='content' id="content" rows="3" data-toggle="modal" data-target="#Modal"></textarea>
+   <?php include "post.php"?>
         </div>
-        <button type="button" class="btn btn-outline-primary">Hình Ảnh</button>
-        <button type="button" class="btn btn-outline-secondary">Cảm Xúc</button>
-        <button type="button" class="btn btn-outline-success">Check In</button>
         <!-- <button type="submit" class="btn btn-primary btn-lg">Đăng Bài</button> -->
         </form>
 </div>

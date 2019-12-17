@@ -12,8 +12,10 @@ require_once "functions.php";
              else {
                 $nameOK=false;
              }
+
 ?>
 <?php if($nameOK)
+$sql = true;
 $query = "select * from users where fullname like N'%$search%'";
 $connect = mysqli_connect("localhost", "root", "", "demo1");
 $sql = mysqli_query($connect, $query);
@@ -32,8 +34,8 @@ if ($num > 0 && $search != "")
                         echo '</tr>';
                     }
                     echo '</table>';
-                } 
-                else {
+                }
+                else if($num == 0 || $search == "" ) {
                     echo "Khong tim thay ket qua!";
                 }
 ?>
