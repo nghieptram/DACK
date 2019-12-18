@@ -7,7 +7,7 @@ if ($currentUser) {
 <?php include 'InHeader.php' ?> 
 
 <?php if ($currentUser) : ?>
-<!-- <p>Chào mừng <?php echo $currentUser['fullname'] ?> đã trở lại.</p> -->
+
 
 <div class="row" style="margin: 2vw 0 2vw 0">
 <div class="col-3"></div>

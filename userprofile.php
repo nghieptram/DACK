@@ -31,13 +31,13 @@ $success = true;
         <button class="button">
             Edit Profile
         </button>
-                <li class="nav-item dropdown active">
+                <div class="nav-item dropdown active" style="float: right; display: block;">
                         <a  href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <button class="iconSetting"><i class="fas fa-ellipsis-v"></i></button>
                         </a>
                         
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="float: left">
                             <a class="dropdown-item" href="#">Cài đặt</a>
 
                             <a class="dropdown-item" href="change-password.php">Đổi Mật Khẩu</a>
@@ -47,8 +47,8 @@ $success = true;
                             <a class="dropdown-item" href="logout.php">Đăng Xuất</a>
                         </div>
 
-                    </li> 
-                    <form action="">
+                    </div> 
+                    <form action="" style="padding-top:3vw">
                     <label style = "margin-left: 3vw" for="baiviet"> Bài Viết</label>
                    <a href="friend.php"> <label style = "margin-left: 3vw" for="nguoitheodoi"> Người Theo Dõi</label></a>
                    <a href="friend.php"> <label style = "margin-left: 3vw" for="dangtheodoi"> Đang Theo Dõi</label></a>

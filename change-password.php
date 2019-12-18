@@ -26,9 +26,7 @@ if (isset($_POST['oldPassword'])) {
 }
 
 ?>
-<?php include 'Inheader.php' ?>
-<?php include 'filehide.php' ?>
-
+<?php include "Header.php"?>
 <div style="z-index: 9999999; position: relative; background-color: rgba(192,192,192,0.4); margin: 3vw 25vw 0 25vw; padding: 2vw 2vw 0 2vw">
 <a href="userprofile.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
 <h1>Đổi mật khẩu</h1>
@@ -59,8 +57,7 @@ if (isset($_POST['oldPassword'])) {
     <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Điền mật khẩu mới vào đây lần nữa">
   </div>
   <div style="text-align: center">
-  <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+  <button type="submit" class="btn btn-primary" style="margin-bottom: 2vw>Đổi mật khẩu</button>
   </div>
 </form>
 </div>
-<?php include 'footer.php' ?>
