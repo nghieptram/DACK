@@ -254,6 +254,25 @@ function getMessagesWithUserId($userId1, $userId2) {
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+//cmt 
+
+function createComment($idPost,$userId, $tittle) {
+  global $db;
+  $stmt = $db->prepare("INSERT INTO comments (idPost, userId, tittle, createdAt) VALUE (?, ?, CURRENT_TIMESTAMP())");
+  $stmt->execute();
+  $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $db->lastInsertId();
+}
+
+function getAllComment() {
+  global $db;
+  $stmd = $db -> prepare("SELECT p.id, p.userId, u.fullname as userFullname, u.hasAvatar as userHasAvatar, p.content, p.createAt FROM comments as p LEFT JOIN users as u On u.id = p.userId ORDER BY createdAt DESC");
+  $stmt->execute();
+  $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $comments;
+}
+
 function sendMessage($userId1, $userId2, $content) {
   global $db;
   $stmt = $db->prepare("INSERT INTO messages (userId1, userId2, content, type, createdAt) VALUE (?, ?, ?, ?, CURRENT_TIMESTAMP())");

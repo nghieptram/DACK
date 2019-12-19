@@ -1,5 +1,5 @@
 <?php 
-require_once "Init.php";
+require_once "init.php";
 require_once "functions.php";
 $conversations = getLatestConversations($currentUser['id']);
         $search = strtolower($_POST['country']);
@@ -16,7 +16,7 @@ $conversations = getLatestConversations($currentUser['id']);
 <?php if($nameOK)
 $sql = true;
 $query = "select * from users where fullname like N'%$search%'";
-$connect = mysqli_connect("localhost", "root", "", "doan1");
+$connect = mysqli_connect("localhost", "root", "", "doan");
 $sql = mysqli_query($connect, $query);
 $num = mysqli_num_rows($sql);
 if ($num > 0 && $search != "") 
