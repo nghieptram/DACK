@@ -12,14 +12,14 @@ if (isset($_POST['oldPassword'])) {
   $oldPassword = $_POST['oldPassword'];
   $newPassword = $_POST['newPassword'];
   $newPassword2 = $_POST['newPassword2'];
-
+  
   $oldPasswordOk = password_verify($oldPassword, $currentUser['password']);
   $newPasswordOk = $newPassword == $newPassword2 && strlen($newPassword) >= 6;
-
-  $success = $oldPasswordOk && $newPasswordOk;
-
+if($oldPasswordOk && $newPasswordOk)
+{
   $success = true;
-  if ($success) {
+}
+  if ($success  && !empty($_POST['oldPassword']) && !empty($_POST['newPassword']) && !empty($_POST['newPassword2'])) {
     updateUserPassword($currentUser['id'], password_hash($newPassword, PASSWORD_DEFAULT));
      header('Location: FormLogin.php');
   }
@@ -57,7 +57,7 @@ if (isset($_POST['oldPassword'])) {
     <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Điền mật khẩu mới vào đây lần nữa">
   </div>
   <div style="text-align: center">
-  <button type="submit" class="btn btn-primary" style="margin-bottom: 2vw>Đổi mật khẩu</button>
+  <button type="submit" class="btn btn-primary" style="margin-bottom: 2vw">Đổi mật khẩu</button>
   </div>
 </form>
 </div>

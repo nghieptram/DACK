@@ -196,9 +196,11 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">
-                            <button class="iconTop"><i class="far fa-heart"></i></button>
-                        </a>
+                        <div class="nav-link">
+                            <button data-toggle="modal" data-target="#notification" class="iconTop"><i
+                                    class="far fa-heart"></i></button>
+                            <?php include "notification.php"?>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="userprofile.php">
