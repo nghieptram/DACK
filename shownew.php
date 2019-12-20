@@ -1,9 +1,11 @@
 <!-- <?php
     while($row =mysqli_fetch_assoc($result)){
-        echo '<p>' . $row[$dem]. '</p>';
+        echo '<p>' . $row['content']. '<p>';
     }
 ?> -->
-<?php $dem=0; foreach ($newFeeds as $post) :  ?>
+<?php $dem=($result)?>
+
+<?php foreach ($newFeeds as $post) :  ?>
 <div class="card" style="margin: 2vw;">
     <div class="card-body">
         <h5 class="card-title">
@@ -46,5 +48,4 @@
         </div>
     </div>
     </div>
-    <?php $dem = $dem + $dem;?>
 <?php endforeach; ?>
