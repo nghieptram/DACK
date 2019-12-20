@@ -1,12 +1,16 @@
 <?php 
 require_once 'init.php';
 if ($currentUser) {
-   $newFeeds = getNewFeeds();
-   $userName = $currentUser['fullname'];
-}
-if(isset($_POST['add'])) {
-    echo "sfafasf";
-}
+    // $newFeeds = getNewFeeds();
+    $newFeeds = getNewFeedsForUserId($currentUser['id']);
+  }
+// if ($currentUser) {
+//    $newFeeds = getNewFeeds();
+//    $userName = $currentUser['fullname'];
+// }
+// if(isset($_POST['add'])) {
+//     echo "sfafasf";
+// }
 
 ?>
 <?php include 'InHeader.php' ?>

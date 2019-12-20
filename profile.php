@@ -1,60 +1,49 @@
 <?php
 require_once 'init.php';
-$updateprofile = findUserById($_GET['id']);
-$friendship = getFriends($currentUser['id']);
-foreach ($friendship as $friend) {
-  if ($friend['id'] == $updateprofile['id']) {
+$profile = findUserById($_GET['id']);
+$friends = getFriends($currentUser['id']);
+$isFriend = false;
+foreach ($friends AS $friend) {
+  if ($friend['id'] == $profile['id']) {
     $isFriend = true;
   }
 }
-if (!$currentUser) {
-  header('Location: index.php');
-  exit();
-}
- $userId = $_GET['id'];
- $updateprofile = findUserById($userId);
-
-$isfollowing = getfriendship($currentUser['id'],$userId);
-$isfollower  =  getfriendship($userId,$currentUser['id']);
+$isFollow = isFollow($currentUser['id'], $profile['id']);
+$isRequest = isFollow($profile['id'], $currentUser['id']);
 ?>
-<?php include 'InHeader.php' ?>
- <h1><?php echo $updateprofile['fullname'] ?></h1>
-<img src="./IMG/<?php echo $updateprofile['id'] ?>.jpg">
-<?php  if($isfollowing & $isfollower) : ?>
-Ban Be
-<form method = "POST" action="remove-friend.php">
-<input type="hidden" name = "id" value= "<?php echo $_GET['id'];?>">
-<button type = "submit" class = "btn btn-primary">Xóa Kết Bạn</button>
+<?php include 'header.php' ?>
+<h1>Tường nhà <?php echo $profile['fullname'] ?></h1>
+<img src="./IMG/<?php echo $profile['id'] ?>.jpg">
+<?php if ($isFriend) : ?>
+<form action="friend-request.php" method="POST">
+  <input type="hidden" name="action" value="unfriend">
+  <input type="hidden" name="profileId" value="<?php echo $profile['id'] ?>">
+  <button type="submit" class="btn btn-danger">Hủy kết bạn</button>
 </form>
-
-<?php else: ?>
-<?php  if($isfollowing && !$isfollower) : ?>
-<form method = "POST" action="remove-friend.php">
-<input type="hidden" name = "id" value= "<?php echo $_GET['id'];?>">
-<button type = "submit" class = "btn btn-primary">Hủy Kết Bạn</button>
-</form>
-<?php endif; ?>
-
-
-<?php  if(!$isfollowing && $isfollower) : ?>
-<form method = "POST" action="remove-friend.php">
-<input type="hidden" name = "id" value= "<?php echo $_GET['id'];?>">
-<button type = "submit" class = "btn btn-primary">Hủy Kết Bạn</button>
-</form>
-
-<form method = "POST" action="add-friend.php">
-<input type="hidden" name = "id" value= "<?php echo $_GET['id'];?>">
-<button type = "submit" class = "btn btn-primary">Đồng Ý Kết Bạn</button>
-</form>
-<?php endif; ?>
-
-
-<?php if(!$isfollower && !$isfollowing): ?>
-<form method = "POST" action="add-friend.php">
-<input type="hidden" name = "id" value= "<?php echo $_GET['id'];?>">
-<button type = "submit" class = "btn btn-primary">Gửi Yêu Cầu Kết Bạn</button>
-</form>
-
-<?php endif; ?>  
+<?php else : ?>
+  <?php if ($isFollow) : ?>
+    <form action="friend-request.php" method="POST">
+      <input type="hidden" name="action" value="cancel-friend-request">
+      <input type="hidden" name="profileId" value="<?php echo $profile['id'] ?>">
+      <button type="submit" class="btn btn-primary">Hủy yêu cầu kết bạn</button>
+    </form>
+  <?php elseif ($isRequest) : ?>
+    <form action="friend-request.php" method="POST">
+      <input type="hidden" name="action" value="accept-friend-request">
+      <input type="hidden" name="profileId" value="<?php echo $profile['id'] ?>">
+      <button type="submit" class="btn btn-primary">Chấp nhận yêu cầu kết bạn</button>
+    </form>
+    <form action="friend-request.php" method="POST">
+      <input type="hidden" name="action" value="reject-friend-request">
+      <input type="hidden" name="profileId" value="<?php echo $profile['id'] ?>">
+      <button type="submit" class="btn btn-warning">Từ chối yêu cầu kết bạn</button>
+    </form>
+  <?php else : ?>
+    <form action="friend-request.php" method="POST">
+      <input type="hidden" name="action" value="send-friend-request">
+      <input type="hidden" name="profileId" value="<?php echo $profile['id'] ?>">
+      <button type="submit" class="btn btn-primary">Gửi yêu cầu kết bạn</button>
+    </form>
+  <?php endif; ?>
 <?php endif; ?>
 <?php include 'footer.php' ?>

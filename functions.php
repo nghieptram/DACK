@@ -135,13 +135,40 @@ function generateRandomString($length = 10) {
   
   function getNewFeeds() {
     global $db;
-    $stmt = $db->prepare("SELECT p.id, p.userId, u.fullname as userFullname, u.hasAvatar as userHasAvatar, p.content, p.createdAt FROM posts as p LEFT JOIN users as u ON u.id = p.userId ORDER BY createdAt DESC");
+    $stmt = $db->prepare("SELECT id, content, createdAt FROM posts WHERE id=?");
     $stmt->execute();
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
   }
   
+  function getNewFeedsForUserId($userId) {
+    global $db;
+    $friends = getFriends($userId);
+    $friendIds = array();
+    foreach ($friends as $friend) {
+      $friendIds[] = $friend['id'];
+    }
+    $friendIds[] = $userId;
+    $stmt = $db->prepare("SELECT p.id, p.userId, u.fullname as userFullname, u.hasAvatar as userHasAvatar, p.content, p.createdAt FROM posts as p LEFT JOIN users as u ON u.id = p.userId WHERE p.userId IN (" . implode(',', $friendIds) .  ") ORDER BY createdAt DESC");
+    $stmt->execute();
+    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
+  }
   
+  // function getNewFeedsForProfile($userId) {
+  //   global $db;
+  //   $friends = getFriends($userId);
+  //   $friendIds = array();
+  //   foreach ($friends as $friend) {
+  //     $friendIds[] = $friend['id'];
+  //   }
+  //   $friends= findUserById($id);
+  //   $friendIds[] = $id;
+  //   $stmt = $db->prepare("SELECT p.id, p.userId, u.fullname as userFullname, u.hasAvatar as userHasAvatar, p.content, p.createdAt FROM posts as p LEFT JOIN users as u ON u.id = p.userId WHERE p.userId IN (" . implode(',', $friendIds) .  ") ORDER BY createdAt DESC");
+  //   $stmt->execute();
+  //   $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  //   return $posts;
+  // }
   
   function resizeImage($filename, $max_width, $max_height)
   {
@@ -187,13 +214,6 @@ function generateRandomString($length = 10) {
     return false;
   }
 
-  function sendfriendRequest($userId1, $userId2)
-  {
-    global $db;
-    $stmt = $db->prepare("INSERT INTO friendship(userId1,userId2) VALUE (?,?)");
-    $stmt->execute(array ($userId1, $userId2));
-
-  }
 
   function getfriendship($userId1, $userId2)
   {
@@ -211,7 +231,22 @@ function generateRandomString($length = 10) {
 
   }
 
-  
+  function isFollow($userId1, $userId2) {
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM friendship WHERE userId1 = ? AND userId2 = ?");
+    $stmt->execute(array($userId1, $userId2));
+    $user1ToUser2 = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$user1ToUser2) {
+      return false;
+    }
+    $stmt = $db->prepare("SELECT * FROM friendship WHERE userId1 = ? AND userId2 = ?");
+    $stmt->execute(array($userId2, $userId1));
+    $user2ToUser1 = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user2ToUser1) {
+      return false;
+    }
+    return true;
+  } 
 function getFriends($userId) {
   global $db;
   $stmt = $db->prepare("SELECT * FROM friendship WHERE userId1 = ? OR userId2 = ?");
@@ -231,6 +266,36 @@ function getFriends($userId) {
     }
   }
   return $friendship;
+}
+function unfriend($userId1, $userId2) {
+  global $db;
+  $stmt = $db->prepare("DELETE FROM friendship WHERE userId1 = ? AND userId2 = ?");
+  $stmt->execute(array($userId1, $userId2));
+  $stmt = $db->prepare("DELETE FROM friendship WHERE userId1 = ? AND userId2 = ?");
+  $stmt->execute(array($userId2, $userId1));
+}
+
+function sendFriendRequest($userId1, $userId2) {
+  global $db;
+  $stmt = $db->prepare("INSERT INTO friendship(userId1, userId2) VALUES(?, ?)");
+  $stmt->execute(array($userId1, $userId2));
+}
+
+function acceptFriendRequest($userId1, $userId2) {
+  global $db;
+  $stmt = $db->prepare("INSERT INTO friendship(userId1, userId2) VALUES(?, ?)");
+  $stmt->execute(array($userId1, $userId2));
+}
+
+function rejectFriendRequest($userId1, $userId2) {
+  global $db;
+  $stmt = $db->prepare("DELETE FROM friendship WHERE userId1 = ? AND userId2 = ?");
+  $stmt->execute(array($userId2, $userId1));
+}
+function cancelFriendRequest($userId1, $userId2) {
+  global $db;
+  $stmt = $db->prepare("DELETE FROM friendship WHERE userId1 = ? AND userId2 = ?");
+  $stmt->execute(array($userId1, $userId2));
 }
 
 function getLatestConversations($userId) {
@@ -284,4 +349,6 @@ function sendMessage($userId1, $userId2, $content) {
   $stmt = $db->prepare("INSERT INTO messages (userId2, userId1, content, type, createdAt) VALUE (?, ?, ?, ?, ?)");
   $stmt->execute(array($userId1, $userId2, $content, 1, $newMessage['createdAt']));
 }
+
+
 ?>
