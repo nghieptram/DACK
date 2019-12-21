@@ -48,15 +48,7 @@ $success = true;
         src="<?php echo file_exists('./IMG/' . $currentUser['id'] . '.jpg') ? ('./IMG/' . $currentUser['id'] . '.jpg') : ('./IMG/0.jpg') ?>">
     <div>
         <strong id="name"><?php echo $profile['fullname'] ?></strong>
-        <a href="update-profile.php" ><button class="button">
-            Chỉnh sửa trang cá nhân
-        </button></a>
         <div class="nav-item dropdown active" style="float: right; display: block;">
-            <a href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <button class="iconSetting"><i class="fas fa-ellipsis-v"></i></button>
-            </a>
-
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="float: left">
                 <a class="dropdown-item" href="#">Cài đặt</a>
 
