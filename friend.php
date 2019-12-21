@@ -7,7 +7,8 @@ $friends = getFriends($currentUser['id']);
 // var_dump($friends);
 ?>
 <?php include 'header.php' ?>
-<h1>Danh sách bạn bè</h1>
+<h4>Danh sách bạn bè</h4>
+<a  href="index.php" > <p> Quay lại trang chủ</p> </a>
 <ul>
   <?php foreach ($friends as $friend) : ?>
   <li>
