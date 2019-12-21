@@ -22,7 +22,7 @@ if (!$currentUser) {
 }
 if ($currentUser) {
     // $newFeeds = getNewFeeds();
-    $newFeeds = getNewFeedsForUserId($profile['id']);
+    $newFeeds = getNewFeedsForProfile($profile['id']);
    }
 // $newFeeds = getNewFeeds();
 ?>

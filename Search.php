@@ -17,7 +17,7 @@ require_once "functions.php";
 $sql = true;
 $query = "select * from users where fullname like N'%$search%'";
 
-$connect = mysqli_connect("localhost", "root", "", "doan");
+$connect = mysqli_connect("localhost", "root", "", "doan1");
 $sql = mysqli_query($connect, $query);
 $num = mysqli_num_rows($sql);
 if ($num > 0 && $search != "") 
