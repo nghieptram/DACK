@@ -4,6 +4,10 @@ if ($currentUser) {
     // $newFeeds = getNewFeeds();
     $newFeeds = getNewFeedsForUserId($currentUser['id']);
   }
+  if (!$currentUser) {
+    // $newFeeds = getNewFeeds();
+    header('location: FormLogin.php');
+  }
 // if ($currentUser) {
 //    $newFeeds = getNewFeeds();
 //    $userName = $currentUser['fullname'];

@@ -12,7 +12,7 @@ $isFollow = isFollow($currentUser['id'], $profile['id']);
 $isRequest = isFollow($profile['id'], $currentUser['id']);
 ?>
 <?php include 'header.php' ?>
-<h1>Tường nhà <?php echo $profile['fullname'] ?></h1>
+<h1>Tường nhà  <a href="userprofile.php"><?php echo $profile['fullname']?></a> </h1>
 <img src="./IMG/<?php echo $profile['id'] ?>.jpg">
 <?php if ($isFriend) : ?>
 <form action="friend-request.php" method="POST">

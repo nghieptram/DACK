@@ -1,7 +1,7 @@
 <?php 
 require_once "Init.php";
 require_once "functions.php";
-        
+        $friends = getFriends($currentUser['id']);
         $search = strtolower($_POST['country']);
         $user = findFullname($search);
              if ($user) 
@@ -16,6 +16,7 @@ require_once "functions.php";
 <?php if($nameOK)
 $sql = true;
 $query = "select * from users where fullname like N'%$search%'";
+
 $connect = mysqli_connect("localhost", "root", "", "doan1");
 $sql = mysqli_query($connect, $query);
 $num = mysqli_num_rows($sql);
@@ -27,8 +28,9 @@ if ($num > 0 && $search != "")
                     // Vòng lặp while & mysql_fetch_assoc dùng để lấy toàn bộ dữ liệu có trong table và trả về dữ liệu ở dạng array.
                     echo '<table border="1" cellspacing="0" cellpadding="10">';
                     while ($row = mysqli_fetch_assoc($sql)) {
+                        $id=$row['id'];
                         echo '<tr>';
-                            echo "<td>{$row['fullname']}</td>";
+                        echo "<a href='profile.php?id= $id'><br>{$row['fullname']}</br></a>";
                         echo '</tr>';
                     }
                     echo '</table>';

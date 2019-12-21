@@ -1,5 +1,5 @@
 <?php
-$conn= mysqli_connect ('localhost','root','', 'doan');
+$conn= mysqli_connect ('localhost','root','', 'doan1');
 $result = mysqli_query ($conn, 'select count(id) as total from posts');
 $row = mysqli_fetch_assoc($result);
 $total_records = $row['total'];
