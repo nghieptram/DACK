@@ -154,21 +154,6 @@ function generateRandomString($length = 10) {
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
   }
-
-
-  function getNewFeedForUserProfile($userId) {
-    global $db;
-    $friends = getFriends($userId);
-    $friendIds = array();
-    foreach ($friends as $friend) {
-      $friendIds[] = $friend['id'];
-    }
-    $friendIds[] = $userId;
-    $stmt = $db->prepare("SELECT p.id, p.userId, u.fullname as userFullname, u.hasAvatar as userHasAvatar, p.content, p.createdAt FROM posts as p LEFT JOIN users as u ON u.id = p.userId WHERE p.userId =$userId ORDER BY createdAt DESC");
-    $stmt->execute();
-    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $posts;
-  }
   
   // function getNewFeedsForProfile($userId) {
   //   global $db;

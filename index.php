@@ -21,17 +21,18 @@ if ($currentUser) {
 
 <?php if ($currentUser) : ?>
 
-
-<div class="row" style="margin: 2vw 0 2vw 0">
+<div style="background: #fafafa">
+<div class="row" style="margin: 0 0 2vw 0">
     <div class="col-3"></div>
     <div class="col-6">
-        <label for="content">
-            <h1>Tạo Bài Viết</h1>
-        </label>
+            
         <form action="post.php" method="POST">
             <div class="form-group">
+                <div style="background: #f5f6f7; border-radius: 1vw 1vw 1vw 1vw; padding: 0 1vw 1vw 1vw;">
+                <h4 style="font-family: Arial;; margin-top: 2vw; padding-top: 1vw">Tạo Bài Viết</h4>
                 <textarea class="form-control" name='content' id="content" rows="3" data-toggle="modal"
                     data-target="#Modal"></textarea>
+                </div>
                 <?php include "post.php"?>
         </form>
     </div>
@@ -44,6 +45,7 @@ if ($currentUser) {
 <!-- repost -->
 <div class="pagination">
 <?php include "showpagination.php"?>
+</div>
 </div>
 <?php include 'footer.php' ?>
 
