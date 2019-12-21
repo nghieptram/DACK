@@ -8,7 +8,7 @@ if (!$currentUser) {
 }
 if ($currentUser) {
     // $newFeeds = getNewFeeds();
-    $newFeeds = getNewFeedsForUserId($currentUser['id']);
+    $newFeeds = getNewFeedForUserProfile($currentUser['id']);
    }
 // $newFeeds = getNewFeeds();
 ?>
