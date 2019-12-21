@@ -88,10 +88,10 @@ $success = true;
                 <a class="nav-link">
                     <i class="far fa-heart" style="color:black" name="sub_min_points[]"></i>
                 </a>
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="">
                     <i class="far fa-comment" style="color:black"></i>
                 </a>
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="">
                     <i class="far fa-paper-plane" style="color:black"></i>
                 </a>
             </div>

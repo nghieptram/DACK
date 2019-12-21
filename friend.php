@@ -8,7 +8,7 @@ $friends = getFriends($currentUser['id']);
 ?>
 <?php include 'header.php' ?>
 <h4>Danh sách bạn bè</h4>
-<a  href="index.php" > <p> Quay lại trang chủ</p> </a>
+<a  href="userprofile.php" > <p> Quay lại </p> </a>
 <ul>
   <?php foreach ($friends as $friend) : ?>
   <li>

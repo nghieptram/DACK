@@ -18,7 +18,7 @@
     </script>
     <script src="https://kit.fontawesome.com/fde54e994b.js" crossorigin="anonymous"></script>
 
-    <title> 1760076-1760119 &reg; Đồ Án LTW1</title>
+    <title>1760058-1760076-1760119 &reg; TEAM 3Z</title>
     <LINK REL="SHORTCUT ICON" HREF="./logo.ico">
     </head>
  
