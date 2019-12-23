@@ -27,7 +27,7 @@ if (isset($_POST['fullname'])) {
     $fileSize = $_FILES['avatar']['size'];
     $fileTemp = $_FILES['avatar']['tmp_name'];
     $fileSave = './IMG/' . $currentUser['id'] . '.jpg';
-    // userid.jpg
+    // userId.jpg
     $result = move_uploaded_file($fileTemp, $fileSave);
     if (!$result) {
       $success = false;

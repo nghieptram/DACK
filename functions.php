@@ -110,7 +110,54 @@ function generateRandomString($length = 10) {
   
         $mail->send();
     }
-  
+//
+    function likeStatus($statusID, $userId)
+    {
+      global $db;
+      $stmt = $db->prepare("INSERT INTO teamx_user_likes(statusID, userId) VALUES(?, ?)");
+      $stmt->execute(array($statusID, $userId));
+      return $db->lastInsertId();
+    }
+    
+    function removeLikedStatus($statusID, $userId)
+    {
+      global $db;
+      $stmt = $db->prepare("DELETE FROM teamx_user_likes WHERE statusID = ? AND userId = ?");
+      $stmt->execute(array($statusID, $userId));
+    }
+    function chkLikedStatus($statusID, $userId)
+    {
+      global $db;
+      $stmt = $db->prepare("SELECT * FROM teamx_user_likes WHERE statusID = ? AND userId = ?");
+      $stmt->execute(array($statusID, $userId));
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    function updateLikeCountStatusAdd($statusID)
+    {
+      global $db;
+      $stmt = $db->prepare("SELECT * FROM teamx_user_status WHERE statusID = ?");
+      $stmt->execute(array($statusID));
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      $n = $row['likes'];
+    
+      $stmt = $db->prepare("UPDATE teamx_user_status SET likes=$n+1 WHERE statusID = ?");
+      return $stmt->execute(array($statusID));
+    }
+    
+    function updateLikeCountStatusRemove($statusID)
+    {
+      global $db;
+      $stmt = $db->prepare("SELECT * FROM teamx_user_status WHERE statusID = ?");
+      $stmt->execute(array($statusID));
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      $n = $row['likes'];
+    
+      $stmt = $db->prepare("UPDATE teamx_user_status SET likes=$n-1 WHERE statusID = ?");
+      return $stmt->execute(array($statusID));
+    }   
+    
+//
 
 
   function activateUser($code) {
@@ -141,7 +188,7 @@ function generateRandomString($length = 10) {
     return $posts;
   }
   
-  function getNewFeedsForUserId($userId) {
+  function getNewFeedsForuserId($userId) {
     global $db;
     $friends = getFriends($userId);
     $friendIds = array();
@@ -305,7 +352,7 @@ function getLatestConversations($userId) {
   return $result;
 }
 
-function getMessagesWithUserId($userId1, $userId2) {
+function getMessagesWithuserId($userId1, $userId2) {
   global $db;
   $stmt = $db->prepare("SELECT * FROM messages WHERE userId1 = ? AND userId2 = ? ORDER BY createdAt");
   $stmt->execute(array($userId1, $userId2));

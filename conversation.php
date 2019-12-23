@@ -6,7 +6,7 @@ if (isset($_POST['content'])) {
   sendMessage($currentUser['id'], $_GET['id'], $_POST['content']); 
 }
 
-$messages = getMessagesWithUserId($currentUser['id'], $_GET['id']);
+$messages = getMessagesWithuserId($currentUser['id'], $_GET['id']);
 $user = findUserById($_GET['id']);
 
 ?>

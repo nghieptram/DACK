@@ -2,7 +2,7 @@
 require_once 'init.php';
 if ($currentUser) {
     // $newFeeds = getNewFeeds();
-    $newFeeds = getNewFeedsForUserId($currentUser['id']);
+    $newFeeds = getNewFeedsForuserId($currentUser['id']);
   }
   if (!$currentUser) {
     // $newFeeds = getNewFeeds();
