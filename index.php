@@ -18,8 +18,9 @@ if ($currentUser) {
 
 ?>
 <?php include 'InHeader.php' ?>
+
 <style>
-li:hover {
+ul a li:hover {
   background-color: royalblue;
   border-radius: 2vw 1vw 1vw 2vw;
 
@@ -58,7 +59,6 @@ li:hover {
         require_once 'init.php';
         $friends = getFriends($currentUser['id']);
         ?>
-        <?php include 'header.php' ?>
         <ul style="list-style: none;">
         <?php foreach ($friends as $friend) : ?>
             <a href="profile.php?id=<?php echo $friend['id']; ?>" style="text-decoration: none; color: black;">
