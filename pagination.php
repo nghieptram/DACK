@@ -4,7 +4,7 @@ $result = mysqli_query ($conn, 'select count(id) as total from posts');
 $row = mysqli_fetch_assoc($result);
 $total_records = $row['total'];
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 10;
+$limit = 2;
 $total_page = ceil($total_records/$limit);
 if($current_page > $total_page)
 {

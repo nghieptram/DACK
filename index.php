@@ -18,36 +18,70 @@ if ($currentUser) {
 
 ?>
 <?php include 'InHeader.php' ?>
+<style>
+li:hover {
+  background-color: royalblue;
+  border-radius: 2vw 1vw 1vw 2vw;
 
-<?php if ($currentUser) : ?>
-
+}
+</style>
 <div style="background: #fafafa">
-<div class="row" style="margin: 0 0 2vw 0">
-    <div class="col-3"></div>
-    <div class="col-6">
-            
-        <form action="post.php" method="POST">
-            <div class="form-group">
-                <div style="background: #f5f6f7; border-radius: 1vw 1vw 1vw 1vw; padding: 0 1vw 1vw 1vw;">
-                <h4 style="font-family: Arial;; margin-top: 2vw; padding-top: 1vw">Tạo Bài Viết</h4>
-                <textarea class="form-control" name='content' id="content" rows="3" data-toggle="modal"
-                    data-target="#Modal"></textarea>
+    <div class="row" style="margin: 0 0 2vw 0">
+        <div class="col-1"></div>
+
+        <div class="col-7">
+            <form action="post.php" method="POST">
+                <div class="form-group">
+                    <div style="background: #f5f6f7; border-radius: 1vw 1vw 1vw 1vw; padding: 0 1vw 1vw 1vw;">
+                    <h4 style="font-family: Arial;; margin-top: 2vw; padding-top: 1vw">Tạo Bài Viết</h4>
+                    <textarea class="form-control" name='content' id="content" rows="3" data-toggle="modal"
+                        data-target="#Modal"></textarea>
+                    </div>
+                    <?php include "post.php"?>
                 </div>
-                <?php include "post.php"?>
-        </form>
-    </div>
-    <div class="col-3"></div>
+            </form>
+                <?php include "pagination.php"?>
+                <!-- repost -->
+                <?php include "shownew.php"?>
+                <!-- repost -->
+        </div>
+        <div class="pagination">
+                <?php include "showpagination.php"?>
+                </div>
+</div>
 </div>
 
-<?php include "pagination.php"?>
-<!-- repost -->
-<?php include "shownew.php"?>
-<!-- repost -->
-<div class="pagination">
-<?php include "showpagination.php"?>
+
+<div class="col-3" style="background: #f5f6f7; border-radius: 1vw 1vw 1vw 1vw; margin-top: 2vw; margin-bottom: 5vw">
+    <h4 style="text-align: center; margin-top: 1vw; margin-bottom: 3vw">Danh Sách Bạn Bè</h4>
+        <?php
+        require_once 'init.php';
+        $friends = getFriends($currentUser['id']);
+        ?>
+        <?php include 'header.php' ?>
+        <ul style="list-style: none;">
+        <?php foreach ($friends as $friend) : ?>
+            <a href="profile.php?id=<?php echo $friend['id']; ?>" style="text-decoration: none; color: black;">
+            <li style="margin-bottom: 1vw;">
+                <div class="row">
+                <div class="col-3" style="margin-right: 0">
+                <img class="avatar"
+                src="<?php echo file_exists('./IMG/' . $friend['id'] . '.jpg') ? ('./IMG/' . $friend['id'] . '.jpg') : ('./IMG/0.jpg') ?>">
+                </div>
+                <div class="col-9" style="margin-top: 0.6vw">
+                <b><?php echo $friend['fullname'] ?></b>
+                </div>
+            </li>
+            </a>
+        <?php endforeach; ?>
+        </ul>
+
 </div>
-</div>
+<div class="col-1"></div>
+    </div>
 <?php include 'footer.php' ?>
+
+
 
 <script>
 
@@ -94,4 +128,3 @@ $(document).ready(function() {
 
 });
 </script>
-<?php endif ?>

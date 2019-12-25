@@ -45,7 +45,7 @@ $success = true;
 <?php else: ?>
 
 <div class="row" id="main">
-    <img id="avatar"
+    <img 
         src="<?php echo file_exists('./IMG/' . $profile['id'] . '.jpg') ? ('./IMG/' . $profile['id'] . '.jpg') : ('./IMG/0.jpg') ?>">
     <div>
         <strong id="name"><?php echo $profile['fullname'] ?></strong>

@@ -3,14 +3,13 @@
         echo '<p>' . $row['content']. '<p>';
     }
 ?> -->
-<?php $dem=($result)?>
 
 <?php foreach ($newFeeds as $post) :  ?>
-<div class="card" style="margin: 2vw;">
+<div class="card" style="width: 100vw">
     <div class="card-body">
         <h5 class="card-title">
             <div class="row">
-                <div class="col">
+                <div class="col-1" style="margin-right: 1vw">
                     <?php if ($post['userHasAvatar']) : ?>
                     <img class="avatar" src="./IMG/<?php echo $post['userId'] ?>.jpg">
                     <?php else : ?>
@@ -18,7 +17,7 @@
 
                     <?php endif; ?>
                 </div>
-                <div class="col-11">
+                <div class="col-10" style="margin-top: 1vw">
                     <?php echo $post['userFullname'] ?>
                 </div>
             </div>

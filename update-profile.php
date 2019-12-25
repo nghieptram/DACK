@@ -42,31 +42,55 @@ if (isset($_POST['fullname'])) {
 }
 
 ?>
-<?php include "Header.php"?>
-<div style="z-index: 9999999; position: relative; background-color: rgba(192,192,192,0.4); margin: 3vw 25vw 0 25vw; padding: 2vw 2vw 0 2vw">
-<a href="userprofile.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
-<h1>Cập Nhật Cá Nhân</h1>
-<?php if (!$success) : ?>
+<?php include "InHeader.php"?>
+<div class="row">
+<div class="col-5" style=" margin-top: 3vw; margin-left: 2vw">
 
-<div class="alert alert-danger" role="alert">
-  Vui lòng nhập đầy đủ thông tin!
+<h4 style="margin-bottom: 2vw; ">Thông tin hiện tại</h4>
+<div class="row">
+<div class="col-5">
+<img 
+        src="<?php echo file_exists('./IMG/' . $currentUser['id'] . '.jpg') ? ('./IMG/' . $currentUser['id'] . '.jpg') : ('./IMG/0.jpg') ?>">
+ </div>   
+ <div class="col-7">
+    <div style="margin-top: 3vw;">
+        <p>Họ và tên: <strong id="name"><?php echo $currentUser['fullname'] ?></strong></p>
+        <p>Email: <strong id="name"><?php echo $currentUser['email'] ?></strong></p>
+        <p>Số điện thoại: <strong id="name"><?php echo $currentUser['phone'] ?></strong></p>
+    </div>
+    </div>
+    </div>
 </div>
-<?php endif; ?>
-<form method="POST" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="fullname">Họ và tên</label>
-    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Điền họ và tên vào đây">
+
+<div class= "col-5">
+  <?php include "Header.php"?>
+  <div style="z-index: 9999999; position: relative; background-color: rgba(192,192,192,0.4); margin-top: 3vw; padding: 2vw; border-radius: 2vw 2vw 2vw 2vw">
+  <a href="userprofile.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
+  <h1>Cập Nhật Cá Nhân</h1>
+  <?php if (!$success) : ?>
+
+  <div class="alert alert-danger" role="alert">
+    Vui lòng nhập đầy đủ thông tin!
   </div>
-  <div class="form-group">
-    <label for="phone">Số điện thoại</label>
-    <input type="text" class="form-control" id="phone" name="phone" placeholder="Điền số điện thoại vào đây">
+  <?php endif; ?>
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="fullname">Họ và tên</label>
+      <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Điền họ và tên vào đây">
+    </div>
+    <div class="form-group">
+      <label for="phone">Số điện thoại</label>
+      <input type="text" class="form-control" id="phone" name="phone" placeholder="Điền số điện thoại vào đây">
+    </div>
+    <div class="form-group">
+    
+      <label for="avatar">Hình ảnh đại diện</label>
+      <input type="file" class="form-control-file"  name="avatar">
+    </div>
+    <div style="text-align: center">
+    <button type="submit" class="btn btn-primary" style="margin-bottom: 2vw">Cập nhật</button>
+    </div>
+  </form>
   </div>
-  <div class="form-group">
-  
-    <label for="avatar">Hình ảnh đại diện</label>
-    <input type="file" class="form-control-file" id="avatar" name="avatar">
-  </div>
-  <div style="text-align: center">
-  <button type="submit" class="btn btn-primary" style="margin-bottom: 2vw">Cập nhật</button>
-  </div>
-</form>
+<div class="col-1"></div>
+</div>

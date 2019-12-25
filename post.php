@@ -26,8 +26,8 @@ if (isset($_POST['content'])) {
 <?php endif; ?>
 
 <div class="row" style="margin: 2vw 0 2vw 0">
-    <div class="col-3"></div>
-    <div class="col-6">
+    <!-- <div class="col-3"></div>
+    <div class="col-6"> -->
         <form method="POST">
             <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -60,5 +60,5 @@ if (isset($_POST['content'])) {
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </form>
