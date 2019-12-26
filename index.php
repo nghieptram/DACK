@@ -41,7 +41,7 @@ ul a li:hover {
                     <?php include "post.php"?>
                 </div>
             </form>
-                <?php include "pagination.php"?>
+                <!-- <?php include "pagination.php"?> -->
                 <!-- repost -->
                 <?php include "shownew.php"?>
                 <!-- repost -->

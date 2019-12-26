@@ -189,6 +189,21 @@ function generateRandomString($length = 10) {
   }
   
   function getNewFeedsForuserId($userId) {
+    $conn= mysqli_connect ('localhost','root','', 'doan1');
+    $result = mysqli_query ($conn, 'select count(id) as total from posts');
+    $row = mysqli_fetch_assoc($result);
+    $total_records = $row['total'];
+    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $limit = 5;
+    $total_page = ceil($total_records/$limit);
+    if($current_page > $total_page)
+    {
+        $current_page=$total_page;
+    }
+    else if ($current_page<1){
+        $current_page=1;
+    }
+    $start = ($current_page - 1) * $limit;
     global $db;
     $friends = getFriends($userId);
     $friendIds = array();
@@ -196,7 +211,7 @@ function generateRandomString($length = 10) {
       $friendIds[] = $friend['id'];
     }
     $friendIds[] = $userId;
-    $stmt = $db->prepare("SELECT p.id, p.userId, u.fullname as userFullname, u.hasAvatar as userHasAvatar, p.content, p.createdAt FROM posts as p LEFT JOIN users as u ON u.id = p.userId WHERE p.userId IN (" . implode(',', $friendIds) .  ") ORDER BY createdAt DESC");
+    $stmt = $db->prepare("SELECT p.id, p.userId, u.fullname as userFullname, u.hasAvatar as userHasAvatar, p.content, p.createdAt FROM posts as p LEFT JOIN users as u ON u.id = p.userId  WHERE p.userId IN (" . implode(',', $friendIds) .  ") ORDER BY createdAt DESC  LIMIT $start, $limit");
     $stmt->execute();
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
