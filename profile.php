@@ -93,6 +93,7 @@ $success = true;
             <form action="friend-request.php" method="POST">
                 <input type="hidden" name="action" value="send-friend-request">
                 <input type="hidden" name="profileId" value="<?php echo $profile['id'] ?>">
+                <input type="hidden" name="notifyID" value="1">
                 <button type="submit" class="btn btn-primary">Gửi yêu cầu kết bạn</button>
             </form>
         <?php endif; ?>

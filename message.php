@@ -6,7 +6,10 @@
 <?php
 require_once 'init.php';
 $conversations = getLatestConversations($currentUser['id']);
-
+if(isset($_POST['deleteall']))
+{
+  deleteMessageWithId($currentUser['id']);
+}
 ?>
   <div style="text-align: center; padding-bottom: 2vw;">    
 <h1>Danh sách tin nhắn</h1>
@@ -44,6 +47,11 @@ $conversations = getLatestConversations($currentUser['id']);
   </div>
 </div>
 <?php endforeach; ?>
+<div>
+<form method="POST">
+  <button type="submit" class="btn btn-danger" name="deleteall" style="margin-top: 2vw">Xóa tất cả tin nhắn</button>
+</form>
+</div>
 </div>
 </div>
 </div>

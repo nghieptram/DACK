@@ -21,6 +21,7 @@ function findUserById($id) {
   return $user;
 }
 
+
 function findFullname($search) {
   global $db;
   $stmt = $db->prepare("SELECT * FROM users WHERE fullname like '%$search%'");
@@ -341,6 +342,12 @@ function acceptFriendRequest($userId1, $userId2) {
   $stmt = $db->prepare("INSERT INTO friendship(userId1, userId2) VALUES(?, ?)");
   $stmt->execute(array($userId1, $userId2));
 }
+function getID($userId1) {
+  global $db;
+  $stmt = $db->prepare("SELECT * FROM notify WHERE  forUserID = $userId1 ");
+  return $stmt->fetch(PDO::FETCH_ASSOC);
+   
+}
 
 function rejectFriendRequest($userId1, $userId2) {
   global $db;
@@ -406,4 +413,24 @@ function sendMessage($userId1, $userId2, $content) {
 }
 
 
+function getAllNotify($forUserID) {
+  global $db;
+  $stmt = $db -> prepare("SELECT fromUserID, forUserID, fullname, createdAt FROM notify, users WHERE forUserID=$forUserID and users.id = notify.fromUserID ORDER BY createdAt DESC");
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function insertNotify_Notify($forUserID, $fromUserID) {
+  global $db;
+  $stmt = $db->prepare("INSERT INTO notify (n_type, forUserID, fromUserID) VALUES (?, ?, ?)");
+  $stmt->execute(array(1, $forUserID, $fromUserID));
+  return $db->lastInsertId();
+}
+
+function deleteMessageWithId($id)
+  {
+    global $db;
+    $stmt = $db->prepare("DELETE FROM messages WHERE userId1=?");
+    $stmt->execute(array($id));
+  }
 ?>

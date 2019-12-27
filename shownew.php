@@ -73,8 +73,11 @@ foreach ($newFeeds as $post) :  ?>
         </p>
         <div class="row">
             <a class="nav-link" onclick="arata_ascunde(this);">
-                <i class="far fa-heart"></i>
+            <form action='Like.php' method="POST">
+                <button type="submit" class="far fa-heart"></button>
+            </form>
             </a>
+            
             <a class="nav-link" href="index.php">
                 <i class="far fa-comment"></i>
             </a>

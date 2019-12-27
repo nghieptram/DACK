@@ -26,8 +26,8 @@ if($oldPasswordOk && $newPasswordOk)
 }
 
 ?>
-<?php include "Header.php"?>
-<div style="z-index: 9999999; position: relative; background-color: rgba(192,192,192,0.4); margin: 3vw 25vw 0 25vw; padding: 2vw 2vw 0 2vw">
+<?php include "InHeader.php"?>
+<div style="background-color: rgba(192,192,192,0.4); margin: 3vw 25vw 0 25vw; padding: 2vw 2vw 0 2vw">
 <a href="userprofile.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
 <h1>Đổi mật khẩu</h1>
 <?php if (!$success) : ?>
@@ -43,17 +43,17 @@ if($oldPasswordOk && $newPasswordOk)
   </ul>
 </div>
 <?php endif; ?>
-<form method="POST">
+<form action="change-password.php" method="POST">
   <div class="form-group">
-    <label for="oldPassword">Mật khẩu cũ</label>
+    <label for="password">Mật khẩu cũ</label>
     <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Điền mật khẩu cũ vào đây">
   </div>
   <div class="form-group">
-    <label for="newPassword">Mật khẩu mới</label>
+    <label for="password">Mật khẩu mới</label>
     <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Điền mật khẩu mới vào đây">
   </div>
   <div class="form-group">
-    <label for="newPassword2">Mật khẩu mới (nhập lại)</label>
+    <label for="password">Mật khẩu mới (nhập lại)</label>
     <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Điền mật khẩu mới vào đây lần nữa">
   </div>
   <div style="text-align: center">
@@ -61,3 +61,9 @@ if($oldPasswordOk && $newPasswordOk)
   </div>
 </form>
 </div>
+
+
+
+
+
+
