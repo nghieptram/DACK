@@ -49,7 +49,7 @@ if (isset($_POST['fullname'])) {
 <h4 style="margin-bottom: 2vw; ">Thông tin hiện tại</h4>
 <div class="row">
 <div class="col-4">
-<img id="avatar"
+<img id="avatar" 
         src="<?php echo file_exists('./IMG/' . $currentUser['id'] . '.jpg') ? ('./IMG/' . $currentUser['id'] . '.jpg') : ('./IMG/0.jpg') ?>">
  </div>   
  <div class="col-8">
@@ -64,7 +64,7 @@ if (isset($_POST['fullname'])) {
 
 <div class= "col-5">
   <?php include "Header.php"?>
-  <div style=" background-color: rgba(192,192,192,0.4); margin-top: 3vw; padding: 2vw; border-radius: 2vw 2vw 2vw 2vw">
+  <div style=" background-color: rgba(192,192,192,0.4); margin-top: 3vw; padding: 2vw; border-radius: 2vw 2vw 2vw 2vw">s
   <a href="userprofile.php"> <div> <img style="float: right; width: 2vw; heigh:2vw; " src="./IMG/dongtab.png" /> </a> </div>
   <h1>Cập Nhật Cá Nhân</h1>
   <?php if (!$success) : ?>

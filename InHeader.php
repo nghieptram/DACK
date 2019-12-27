@@ -102,7 +102,7 @@
 
     .iconTop {
         font-size: 28px;
-        background-color: none;
+        background-color: white;
         border: none;
         cursor: pointer;
         color: #212121;

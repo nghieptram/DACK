@@ -8,15 +8,10 @@ if ($currentUser) {
     // $newFeeds = getNewFeeds();
     header('location: FormLogin.php');
   }
-// if ($currentUser) {
-//    $newFeeds = getNewFeeds();
-//    $userName = $currentUser['fullname'];
-// }
-// if(isset($_POST['add'])) {
-//     echo "sfafasf";
-// }
-
 ?>
+
+
+
 <?php include 'InHeader.php' ?>
 
 <style>

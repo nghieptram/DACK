@@ -188,7 +188,61 @@ function generateRandomString($length = 10) {
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
   }
+
+  function userLiked($post_id,$userid)
+  {
+    // echo $userid;
+    $conn= mysqli_connect ('localhost','root','', 'doan1');
+
+    $sql = "SELECT * FROM likes WHERE userId=$userid
+          AND post_id=$post_id ";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  function getLikes($id)
+    {
+      global $db;
+      $stmt = $db->prepare("SELECT COUNT(*) FROM likes WHERE post_id = ?");
+      $stmt->execute(array($id));
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    function getcomment($id){
+
+      global $db;
+      $stmt=$db->prepare("SELECT p.id,pc.userId,u.hasAvatar,u.fullname as Fullname,pc.content,pc.createdAt ,u.hasAvatar FROM comments AS pc JOIN users as u on  u.id= pc.userId JOIN posts as p where p.id= pc.post_id and pc.post_id=? ORDER BY pc.createdAt DESC");
+      $stmt->execute(array($id));
+      $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $posts;
+      
+    }
+    function usercommentd($post_id,$userid)
+          {
+            $conn= mysqli_connect ('localhost','root','', 'doan1');
+    
+            $sql = "SELECT * FROM comments WHERE userId=$userid
+                  AND post_id=$post_id ";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+              return true;
+            }else{
+              return false;
+            }
+          }
   
+          function upcomment($userId,$postId,$content){
+            global $db;
+            $stmt=$db->prepare("INSERT INTO comments (post_id,userId,content) VALUES (? , ?,?)");
+            $stmt->execute(array($postId,$userId,$content));
+           return $db->lastInsertId();
+
+          }
   function getNewFeedsForuserId($userId) {
     $conn= mysqli_connect ('localhost','root','', 'doan1');
     $result = mysqli_query ($conn, 'select count(id) as total from posts');
@@ -287,6 +341,13 @@ function generateRandomString($length = 10) {
 
   }
 
+  function getID($userId1) {
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM notify WHERE  forUserID = $userId1 ");
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+     
+  }
+
   function isFollow($userId1, $userId2) {
     global $db;
     $stmt = $db->prepare("SELECT * FROM friendship WHERE userId1 = ? AND userId2 = ?");
@@ -342,12 +403,6 @@ function acceptFriendRequest($userId1, $userId2) {
   $stmt = $db->prepare("INSERT INTO friendship(userId1, userId2) VALUES(?, ?)");
   $stmt->execute(array($userId1, $userId2));
 }
-function getID($userId1) {
-  global $db;
-  $stmt = $db->prepare("SELECT * FROM notify WHERE  forUserID = $userId1 ");
-  return $stmt->fetch(PDO::FETCH_ASSOC);
-   
-}
 
 function rejectFriendRequest($userId1, $userId2) {
   global $db;
@@ -359,6 +414,25 @@ function cancelFriendRequest($userId1, $userId2) {
   $stmt = $db->prepare("DELETE FROM friendship WHERE userId1 = ? AND userId2 = ?");
   $stmt->execute(array($userId1, $userId2));
 }
+
+function getAllNotify($forUserID) {
+  global $db;
+  $stmt = $db -> prepare("SELECT fromUserID, forUserID, fullname, createdAt FROM notify, users WHERE forUserID=$forUserID and users.id = notify.fromUserID ORDER BY createdAt DESC");
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function insertNotify_Notify($forUserID, $fromUserID) {
+  global $db;
+  $stmt = $db->prepare("INSERT INTO notify (n_type, forUserID, fromUserID) VALUES (?, ?, ?)");
+  $stmt->execute(array(1, $forUserID, $fromUserID));
+  return $db->lastInsertId();
+}
+function deleteMessageWithId($id)
+  {
+    global $db;
+    $stmt = $db->prepare("DELETE FROM messages WHERE userId1=?");
+    $stmt->execute(array($id));
+  }
 
 function getLatestConversations($userId) {
   global $db;
@@ -412,25 +486,4 @@ function sendMessage($userId1, $userId2, $content) {
   $stmt->execute(array($userId1, $userId2, $content, 1, $newMessage['createdAt']));
 }
 
-
-function getAllNotify($forUserID) {
-  global $db;
-  $stmt = $db -> prepare("SELECT fromUserID, forUserID, fullname, createdAt FROM notify, users WHERE forUserID=$forUserID and users.id = notify.fromUserID ORDER BY createdAt DESC");
-  $stmt->execute();
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function insertNotify_Notify($forUserID, $fromUserID) {
-  global $db;
-  $stmt = $db->prepare("INSERT INTO notify (n_type, forUserID, fromUserID) VALUES (?, ?, ?)");
-  $stmt->execute(array(1, $forUserID, $fromUserID));
-  return $db->lastInsertId();
-}
-
-function deleteMessageWithId($id)
-  {
-    global $db;
-    $stmt = $db->prepare("DELETE FROM messages WHERE userId1=?");
-    $stmt->execute(array($id));
-  }
 ?>

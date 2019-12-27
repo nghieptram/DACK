@@ -45,15 +45,15 @@ if($oldPasswordOk && $newPasswordOk)
 <?php endif; ?>
 <form action="change-password.php" method="POST">
   <div class="form-group">
-    <label for="password">Mật khẩu cũ</label>
+  <label for="password">Mật khẩu cũ</label>
     <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Điền mật khẩu cũ vào đây">
   </div>
   <div class="form-group">
-    <label for="password">Mật khẩu mới</label>
+  <label for="password">Mật khẩu mới</label>
     <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Điền mật khẩu mới vào đây">
   </div>
   <div class="form-group">
-    <label for="password">Mật khẩu mới (nhập lại)</label>
+  <label for="password">Mật khẩu mới (nhập lại)</label>
     <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Điền mật khẩu mới vào đây lần nữa">
   </div>
   <div style="text-align: center">
@@ -61,9 +61,3 @@ if($oldPasswordOk && $newPasswordOk)
   </div>
 </form>
 </div>
-
-
-
-
-
-
