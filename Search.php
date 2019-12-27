@@ -1,5 +1,5 @@
 <?php 
-require_once "Init.php";
+require_once "init.php";
 require_once "functions.php";
         $friends = getFriends($currentUser['id']);
         $search = strtolower($_POST['country']);

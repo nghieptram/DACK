@@ -128,6 +128,28 @@
         width: 1px;
         background-color: black;
     }
+
+    .notification {
+        background-color: white;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+    }
+
+    .notification:hover {
+        background: white;
+    }
+
+    .notification .badge {
+        position: absolute;
+        font-size: 10px;
+        top: 0px;
+        right: -3px;
+        padding: 5px 5px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+    }
     </style>
 </head>
 <?php if ($currentUser): ?>
@@ -137,6 +159,13 @@
     if(!empty($_POST['country'])) 
     header('Location: Search.php');
  }
+ if(!isset($_COOKIE["coutNotify"])) 
+ setcookie("coutNotify", 0);
+ $getAllNotify =  getAllNotify($currentUser['id']);
+$countNotifyCation=0;
+ foreach ($getAllNotify as $notify)
+    $countNotifyCation++;
+    $s = $_COOKIE["coutNotify"];
 ?>
 
 <body>
@@ -196,10 +225,18 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <div class="nav-link">
-                            <button data-toggle="modal" data-target="#notification" class="iconTop"><i
-                                    class="far fa-heart"></i></button>
-                            <?php include "notification.php"?>
+                        <div class="nav-link" >
+                            <div class="notification">
+                                <button data-toggle="modal" data-target="#notification" class="iconTop"><i
+                                        class="far fa-heart"></i></button>
+                                <?php 
+                                include "notification.php"
+                                ?>
+                                <?php 
+                                if($countNotifyCation > $_COOKIE["coutNotify"]) : ?>
+                                    <span class="badge"><?php echo $countNotifyCation;?></span>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item">
